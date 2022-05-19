@@ -2,25 +2,29 @@
 
 void Main()
 {
-	var paidAmmount = 200;
+	var paidAmmount = 300;
 	var price = 125;
 	var change = paidAmmount - price;
 	
+	var result = new Stack<int>();
+	
 	while (change > 0)
 	{
-		CalculateChange(ref change, 100);
-		CalculateChange(ref change, 50);
-		CalculateChange(ref change, 25);
-		CalculateChange(ref change, 10);
-		CalculateChange(ref change, 5);
+		CalculateChange(ref change, result, 100);
+		CalculateChange(ref change, result, 50);
+		CalculateChange(ref change, result, 25);
+		CalculateChange(ref change, result, 10);
+		CalculateChange(ref change, result, 5);
 	}
+	
+	result.Dump();
 }
 
-void CalculateChange(ref int change, int faceValue)
+void CalculateChange(ref int change, Stack<int> coins, int faceValue)
 {
 	if (change % faceValue != change)
 	{
 		change -= faceValue;
-		Console.WriteLine($"{((decimal)faceValue / 100):0.00} USD");
+		coins.Push(faceValue);
 	}
 }
