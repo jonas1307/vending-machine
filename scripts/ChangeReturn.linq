@@ -6,19 +6,24 @@ void Main()
 	var price = 125;
 	var change = paidAmmount - price;
 	
-	var result = new Stack<int>();
-
-	var faceValues = new int[] { 100, 50, 25, 10, 5 };
-
-	foreach (var value in faceValues)
-	{
-		CalculateChange(ref change, result, value);
-	}
-	
-	result.Dump();
+	CalculateChange(change).Dump();
 }
 
-void CalculateChange(ref int change, Stack<int> coins, int faceValue)
+Stack<int> CalculateChange(int change)
+{
+	var result = new Stack<int>();
+	
+	var faceValues = new int[] { 100, 50, 25, 10, 5 };
+	
+	foreach (var value in faceValues)
+	{
+		SelectCoins(ref change, result, value);
+	}
+	
+	return result;
+}
+
+void SelectCoins(ref int change, Stack<int> coins, int faceValue)
 {
 	while (change >= faceValue)
 	{
