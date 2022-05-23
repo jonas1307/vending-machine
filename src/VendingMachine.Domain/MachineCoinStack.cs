@@ -9,11 +9,10 @@ namespace VendingMachine.Domain
 
         public MachineCoinStack()
         {
-            Coins.Add(5, 0);
-            Coins.Add(10, 0);
-            Coins.Add(25, 0);
-            Coins.Add(50, 0);
-            Coins.Add(100, 0);
+            foreach (var coin in Settings.CoinFaceValues)
+            {
+                Coins.Add(coin, 0);
+            }
         }
 
         public void AddCoin(int faceValue) => Coins[faceValue] += 1;

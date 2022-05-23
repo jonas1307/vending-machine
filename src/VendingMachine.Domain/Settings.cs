@@ -2,6 +2,6 @@
 {
     public class Settings
     {
-        public static int[] CoinValues = { 100, 50, 25, 10, 5 };
+        public static int[] CoinFaceValues = { 100, 50, 25, 10, 5 };
     }
 }

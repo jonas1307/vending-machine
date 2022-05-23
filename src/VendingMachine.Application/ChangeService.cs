@@ -1,4 +1,5 @@
 ﻿using VendingMachine.Application.Contracts;
+using VendingMachine.Domain;
 
 namespace VendingMachine.Application
 {
@@ -8,9 +9,7 @@ namespace VendingMachine.Application
         {
             var result = new Stack<int>();
 
-            var faceValues = new int[] { 100, 50, 25, 10, 5 };
-
-            foreach (var value in faceValues)
+            foreach (var value in Settings.CoinFaceValues)
             {
                 SelectCoins(ref change, result, value);
             }
