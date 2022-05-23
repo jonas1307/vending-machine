@@ -20,9 +20,10 @@ namespace VendingMachine.Domain
             Quantity = quantity;
         }
 
-        public void Sell()
+        public void Sell(int paidAmmount)
         {
             if (Quantity <= 0) throw new ProductNotAvailableException("Product not available for selling");
+            if (paidAmmount < Value) throw new InsufficientFundsException("Product price is higher than the value provided");
 
             Quantity -= 1;
         }
