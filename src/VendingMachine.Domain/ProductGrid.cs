@@ -1,6 +1,8 @@
-﻿namespace VendingMachine.Domain
+﻿using VendingMachine.Domain.Contracts;
+
+namespace VendingMachine.Domain
 {
-    public class ProductGrid
+    public class ProductGrid : IProductGrid
     {
         public ProductGrid()
         {

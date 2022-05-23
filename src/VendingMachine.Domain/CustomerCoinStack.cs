@@ -1,6 +1,8 @@
-﻿namespace VendingMachine.Domain
+﻿using VendingMachine.Domain.Contracts;
+
+namespace VendingMachine.Domain
 {
-    public class CustomerCoinStack : Stack<int>
+    public class CustomerCoinStack : Stack<int>, ICustomerCoinStack
     {
         public Stack<int> Coins { get; } = new Stack<int>();
 

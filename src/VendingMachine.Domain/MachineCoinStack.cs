@@ -1,8 +1,9 @@
-﻿using VendingMachine.Domain.Exceptions;
+﻿using VendingMachine.Domain.Contracts;
+using VendingMachine.Domain.Exceptions;
 
 namespace VendingMachine.Domain
 {
-    public class MachineCoinStack : Stack<int>
+    public class MachineCoinStack : Stack<int>, IMachineCoinStack
     {
         private Dictionary<int, int> Coins { get; } = new Dictionary<int, int>();
 

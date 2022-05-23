@@ -1,6 +1,8 @@
-﻿namespace VendingMachine.Application
+﻿using VendingMachine.Application.Contracts;
+
+namespace VendingMachine.Application
 {
-    public class ChangeService
+    public class ChangeService : IChangeService
     {
         public Stack<int> CalculateChange(int change)
         {
