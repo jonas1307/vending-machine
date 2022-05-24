@@ -9,6 +9,7 @@ namespace VendingMachine.Application.Utils
         {
             services.AddSingleton<MachineInitialization>();
             services.AddTransient<IChangeService, ChangeService>();
+            services.AddTransient<IMachineService, MachineService>();
         }
     }
 }
