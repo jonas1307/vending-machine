@@ -1,28 +1,58 @@
 ﻿using VendingMachine.Application.Contracts;
 using VendingMachine.Domain;
+using VendingMachine.Domain.Contracts;
+using VendingMachine.Domain.Exceptions;
 
 namespace VendingMachine.Application
 {
     public class ChangeService : IChangeService
     {
+        private readonly IMachineCoinStack _machineCoinStack;
+
+        public ChangeService(IMachineCoinStack machineCoinStack)
+        {
+            _machineCoinStack = machineCoinStack;
+        }
+
         public Stack<int> CalculateChange(int change)
         {
-            var result = new Stack<int>();
+            var changeStack = new Stack<int>();
+            var tempChangeStack = new Dictionary<int, int>();
 
             foreach (var value in Settings.CoinFaceValues)
             {
-                SelectCoins(ref change, result, value);
+                var coins = SelectCoins(ref change, value);
+                tempChangeStack.Add(value, coins);
             }
 
-            return result;
+            if (change > 0) throw new NotEnoughChangeException("not enough change for selling the selected product");
+
+            ReleaseCoins(changeStack, tempChangeStack);
+
+            return changeStack;
         }
 
-        private void SelectCoins(ref int change, Stack<int> coins, int faceValue)
+        private int SelectCoins(ref int change, int faceValue)
         {
-            while (change >= faceValue)
+            var totalCoins = change / faceValue;
+
+            if (totalCoins == 0) return 0;
+            if (!_machineCoinStack.HasEnoughCoins(faceValue, totalCoins)) return 0;
+
+            change -= faceValue * totalCoins;
+
+            return totalCoins;
+        }
+
+        private void ReleaseCoins(Stack<int> changeStack, Dictionary<int, int> tempChangeStack)
+        {
+            foreach (var faceValue in tempChangeStack.Keys)
             {
-                change -= faceValue;
-                coins.Push(faceValue);
+                for (int i = 0; i < tempChangeStack[faceValue]; i++)
+                {
+                    _machineCoinStack.RemoveCoin(faceValue);
+                    changeStack.Push(faceValue);
+                }
             }
         }
     }
