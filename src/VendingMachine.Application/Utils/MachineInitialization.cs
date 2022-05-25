@@ -1,8 +1,10 @@
-﻿using VendingMachine.Domain;
+﻿using System.Diagnostics.CodeAnalysis;
+using VendingMachine.Domain;
 using VendingMachine.Domain.Contracts;
 
 namespace VendingMachine.Application.Utils
 {
+    [ExcludeFromCodeCoverage]
     public class MachineInitialization
     {
         private bool _initialized;
