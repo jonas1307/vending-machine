@@ -8,6 +8,7 @@
 	var alertMessage = TempData["AlertMessage"]?.ToString();
 
 	var formatCurrency = (int ammount) => ((decimal)ammount / 100).ToString("C", CultureInfo.GetCultureInfo("en-US"));
+	var formatAvailability = (int quantity) => ($"{(quantity > 1 ? $"{quantity} left" : (quantity == 1 ? "Last available!" : "Sold out"))}");
 }
 
 <h1 class="display-4 text-center">Vending Machine</h1>
@@ -41,7 +42,10 @@
 	<form method="post" asp-controller="Home" asp-action="SelectProduct" class="d-grid gap-2 col-6 mx-auto">
 		@foreach (var product in Model.Products)
 		{
-			<button type="submit" name="productId" value="@product.Id" class="btn btn-primary">@($"{product.Name} ({formatCurrency(product.Value)})")</button>
+			<button type="submit" name="productId" value="@product.Id" class="btn btn-primary">
+				@($"{product.Name} ({formatCurrency(product.Value)})")
+				<span class="badge bg-secondary">@(formatAvailability(product.Quantity))</span>
+			</button>
 		}
 	</form>
 </fieldset>
