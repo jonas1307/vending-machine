@@ -1,0 +1,55 @@
+﻿@using System.Globalization
+@using VendingMachine.Domain
+@model HomeViewModel
+
+@{
+	ViewData["Title"] = "Home";
+	var sucessMessage = TempData["SuccessMessage"]?.ToString();
+	var alertMessage = TempData["AlertMessage"]?.ToString();
+
+	var formatCurrency = (int ammount) => ((decimal)ammount / 100).ToString("C", CultureInfo.GetCultureInfo("en-US"));
+}
+
+<h1 class="display-4 text-center">Vending Machine</h1>
+
+@if (!string.IsNullOrEmpty(sucessMessage))
+{
+	<div class="alert alert-success">@Html.Raw(sucessMessage)</div>
+}
+
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+	<div class="alert alert-danger">@Html.Raw(alertMessage)</div>
+}
+
+<h4>Available Amount: @Model.AvailableCurrency</h4>
+
+<fieldset class="row">
+	<legend>1. Insert your coins</legend>
+
+	<form method="post" asp-controller="Home" asp-action="AddCoin" class="d-flex col-8 mx-auto justify-content-evenly">
+		@foreach (var faceValue in Settings.CoinFaceValues)
+		{
+			<button type="submit" name="faceValue" value="@faceValue" class="btn btn-primary">@($"Add {formatCurrency(faceValue)} coin")</button>
+		}
+	</form>
+</fieldset>
+
+<fieldset class="row">
+	<legend>2. Select a product</legend>
+
+	<form method="post" asp-controller="Home" asp-action="SelectProduct" class="d-grid gap-2 col-6 mx-auto">
+		@foreach (var product in Model.Products)
+		{
+			<button type="submit" name="productId" value="@product.Id" class="btn btn-primary">@($"{product.Name} ({formatCurrency(product.Value)})")</button>
+		}
+	</form>
+</fieldset>
+
+<fieldset class="row">
+	<legend>Misc</legend>
+
+	<form method="post" asp-controller="Home" asp-action="ReturnCoins">
+		<button type="submit" class="btn btn-secondary">Return coins</button>
+	</form>
+</fieldset>
