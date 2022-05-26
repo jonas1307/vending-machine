@@ -34,16 +34,11 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-- [Visual Studio 2022](https://visualstudio.microsoft.com/) or greater
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) or later
 
-### Installation (for Visual Studio)
+### Installation (for Visual Studio 2022 or later)
 
 1. Clone the repository on your machine
-
-```sh
-git clone https://github.com/jonas1307/vending-machine.git
-```
-
 2. Open the file `VendingMachine.sln` using Visual Studio 2022
 3. Build the solution using `CTRL+Shift+B` to check for errors (and also restore Nuget packages)
 4. Run the unit tests using `CTRL+R, A`
@@ -66,6 +61,9 @@ git clone https://github.com/jonas1307/vending-machine.git
 - [x] Show the amount of products available to the user
 - [x] Disable buttons for buying out of stock products
 - [ ] Optimize application for smaller screens (responsiveness)
+- [ ] Add Docker support
+- [ ] Add Github Actions support
+- [ ] Publish the application in a cloud service for having a live preview
 
 See the [open issues](https://github.com/jonas1307/vending-machine/issues) for a full list of proposed features (and known issues).
 
