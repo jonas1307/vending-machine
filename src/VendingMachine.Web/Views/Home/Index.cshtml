@@ -42,7 +42,7 @@
 	<form method="post" asp-controller="Home" asp-action="SelectProduct" class="d-grid gap-2 col-6 mx-auto">
 		@foreach (var product in Model.Products)
 		{
-			<button type="submit" name="productId" value="@product.Id" class="btn btn-primary">
+			<button type="submit" name="productId" value="@product.Id" class="btn btn-primary" @(product.Quantity <= 0 ? "disabled" : "")>
 				@($"{product.Name} ({formatCurrency(product.Value)})")
 				<span class="badge bg-secondary">@(formatAvailability(product.Quantity))</span>
 			</button>
