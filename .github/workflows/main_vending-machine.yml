@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'vending-machine'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_38D8A06DB5B442489214F416C279FF1C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CDC3A65359E4418EB1C51B727101F2BD }}
           package: .
